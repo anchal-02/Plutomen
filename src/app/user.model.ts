@@ -1,4 +1,4 @@
-// user.model.ts
+
 export interface Address {
     street: string;
     city: string;

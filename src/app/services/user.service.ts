@@ -1,4 +1,4 @@
-// user.service.ts
+
 import { Injectable } from '@angular/core';
 import { User } from '../user.model';
 
@@ -22,7 +22,7 @@ export class UserService {
           { street: '456 Oak St', city: 'Townsville', state: 'Stateville', zipCode: '67890' },
         ],
       },
-      // Add more users as needed
+      
     ];
   }
 
