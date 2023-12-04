@@ -1,9 +1,9 @@
-
+// edit-user.component.ts
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { User, Address } from '../../user.model';
 import { UserService } from '../../services/user.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-user',
@@ -11,41 +11,62 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./edit-user.component.css'],
 })
 export class EditUserComponent implements OnInit {
-  user: User = { name: '', email: '', mobile: '', gender: '', role: '', addresses: [{ street: '', city: '', state: '', zipCode: '' }] };
+  userForm: FormGroup = this.fb.group({
+    name: ['', Validators.required],
+    email: ['', Validators.required],
+    mobile: ['', Validators.required],
+    gender: ['', Validators.required],
+    role: ['', Validators.required],
+    addresses: this.fb.array([]),
+  });;
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private fb: FormBuilder, private userService: UserService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
+    this.initializeForm();
+
     const userId = this.route.snapshot.params['id'];
     if (userId) {
       const existingUser = this.userService.getUserById(userId);
       if (existingUser) {
-        this.user = { ...existingUser };
+        this.userForm.patchValue(existingUser);
       } else {
-        // Redirect to user list if the user is not found
         this.router.navigate(['/users']);
       }
     }
+  }
+
+  initializeForm(): void {
+    this.userForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      mobile: ['', Validators.required],
+      gender: ['', Validators.required],
+      role: ['', Validators.required],
+      addresses: this.fb.array([]),
+    });
   }
 
   addAddress(): void {
-    this.user.addresses.push({ street: '', city: '', state: '', zipCode: '' });
+    const newAddress = this.fb.group({
+      street: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      zipCode: ['', Validators.required],
+    });
+    this.addresses.push(newAddress);
   }
 
   removeAddress(index: number): void {
-    this.user.addresses.splice(index, 1);
+    this.addresses.removeAt(index);
   }
 
   onSubmit(): void {
-    if (this.user.email) {
-      const existingUser = this.userService.getUserById(this.user.email);
-      if (existingUser) {
-        // Update existing user
-        this.userService.updateUser(this.user);
-      } else {
-        // Redirect to user list if the user is not found
-        this.router.navigate(['/users']);
-      }
-    }
+    console.log('Submit clicked:', this.userForm.value);
+    
+  }
+
+  get addresses() {
+    return this.userForm.get('addresses') as FormArray;
   }
 }

@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { UserService } from './services/user.service';
@@ -22,7 +24,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [AppComponent, UserFormComponent, UserListComponent, EditUserComponent],
-  imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes),AppRoutingModule],
+  imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes),AppRoutingModule,CommonModule,ReactiveFormsModule],
   providers: [UserService, AddressService],
   bootstrap: [AppComponent],
 })

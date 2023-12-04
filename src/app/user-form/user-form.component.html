@@ -1,20 +1,39 @@
+<!-- user-form.component.html -->
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <label for="name">Name:</label>
+  <input id="name" formControlName="name">
 
-<form>
-    <label for="name">Name:</label>
-    <input id="name" [(ngModel)]="user.name" name="name" required>
-  
-    <label for="email">Email:</label>
-    <input id="email" [(ngModel)]="user.email" name="email" required>
-  
-    <label for="mobile">Mobile:</label>
-    <input id="mobile" [(ngModel)]="user.mobile" name="mobile" required>
-  
-    <label for="gender">Gender:</label>
-    <input id="gender" [(ngModel)]="user.gender" name="gender" required>
-  
-    <label for="role">Role:</label>
-    <input id="role" [(ngModel)]="user.role" name="role" required>
-  
-    <button type="submit">Create User</button>
-  </form>
-  
+  <label for="email">Email:</label>
+  <input id="email" formControlName="email">
+
+  <label for="mobile">Mobile:</label>
+  <input id="mobile" formControlName="mobile">
+
+  <label for="gender">Gender:</label>
+  <input id="gender" formControlName="gender">
+
+  <label for="role">Role:</label>
+  <input id="role" formControlName="role">
+
+  <div formArrayName="addresses">
+    <div *ngFor="let address of userForm.get('addresses').controls; let i = index" [formGroupName]="i">
+      <label for="street{{ i }}">Street:</label>
+      <input id="street{{ i }}" formControlName="street">
+
+      <label for="city{{ i }}">City:</label>
+      <input id="city{{ i }}" formControlName="city">
+
+      <label for="state{{ i }}">State:</label>
+      <input id="state{{ i }}" formControlName="state">
+
+      <label for="zipCode{{ i }}">ZIP Code:</label>
+      <input id="zipCode{{ i }}" formControlName="zipCode">
+
+      <button type="button" (click)="removeAddress(i)">Remove Address</button>
+    </div>
+  </div>
+
+  <button type="button" (click)="addAddress()">Add Address</button>
+
+  <button type="submit">Update User</button>
+</form>

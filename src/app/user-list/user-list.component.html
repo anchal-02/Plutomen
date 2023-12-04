@@ -1,6 +1,20 @@
-
+<!-- user-list.component.html -->
 <div>
   <h2>User List</h2>
+
+  <form [formGroup]="filterForm"> 
+    <label for="roleFilter">Filter by Role:</label>
+    <select id="roleFilter" formControlName="role">
+      <option value="">All</option>
+      <option *ngFor="let role of uniqueRoles" [value]="role">{{ role }}</option>
+    </select>
+
+    <label for="genderFilter">Filter by Gender:</label>
+    <select id="genderFilter" formControlName="gender">
+      <option value="">All</option>
+      <option *ngFor="let gender of uniqueGenders" [value]="gender">{{ gender }}</option>
+    </select>
+  </form>
 
   <table>
     <thead>
@@ -29,20 +43,4 @@
       </tr>
     </tbody>
   </table>
-
-  <div>
-    <label for="roleFilter">Filter by Role:</label>
-    <select id="roleFilter" [(ngModel)]="selectedRole" (change)="filteredUsers()">
-      <option value="">All</option>
-      <option *ngFor="let role of uniqueRoles" [value]="role">{{ role }}</option>
-    </select>
-  </div>
-
-  <div>
-    <label for="genderFilter">Filter by Gender:</label>
-    <select id="genderFilter" [(ngModel)]="selectedGender" (change)="filteredUsers()">
-      <option value="">All</option>
-      <option *ngFor="let gender of uniqueGenders" [value]="gender">{{ gender }}</option>
-    </select>
-  </div>
 </div>
