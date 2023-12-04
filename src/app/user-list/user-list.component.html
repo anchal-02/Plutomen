@@ -1,0 +1,48 @@
+<!-- user-list.component.html -->
+<div>
+  <h2>User List</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>Gender</th>
+        <th>Role</th>
+        <th>Addresses</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of filteredUsers">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.mobile }}</td>
+        <td>{{ user.gender }}</td>
+        <td>{{ user.role }}</td>
+        <td>{{ user.addresses.length }}</td>
+        <td>
+          <button (click)="editUser(user)">Edit</button>
+          <button (click)="deleteUser(user)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div>
+    <label for="roleFilter">Filter by Role:</label>
+    <select id="roleFilter" [(ngModel)]="selectedRole" (change)="filterUsers()">
+      <option value="">All</option>
+      <option *ngFor="let role of uniqueRoles" [value]="role">{{ role }}</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="genderFilter">Filter by Gender:</label>
+    <select id="genderFilter" [(ngModel)]="selectedGender" (change)="filterUsers()">
+      <option value="">All</option>
+      <option *ngFor="let gender of uniqueGenders" [value]="gender">{{ gender }}</option>
+    </select>
+  </div>
+</div>

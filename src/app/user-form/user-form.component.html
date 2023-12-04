@@ -1,0 +1,20 @@
+<!-- user-form.component.html -->
+<form>
+    <label for="name">Name:</label>
+    <input id="name" [(ngModel)]="user.name" name="name" required>
+  
+    <label for="email">Email:</label>
+    <input id="email" [(ngModel)]="user.email" name="email" required>
+  
+    <label for="mobile">Mobile:</label>
+    <input id="mobile" [(ngModel)]="user.mobile" name="mobile" required>
+  
+    <label for="gender">Gender:</label>
+    <input id="gender" [(ngModel)]="user.gender" name="gender" required>
+  
+    <label for="role">Role:</label>
+    <input id="role" [(ngModel)]="user.role" name="role" required>
+  
+    <button type="submit">Create User</button>
+  </form>
+  
