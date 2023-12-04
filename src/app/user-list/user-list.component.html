@@ -32,7 +32,7 @@
 
   <div>
     <label for="roleFilter">Filter by Role:</label>
-    <select id="roleFilter" [(ngModel)]="selectedRole" (change)="filterUsers()">
+    <select id="roleFilter" [(ngModel)]="selectedRole" (change)="filteredUsers()">
       <option value="">All</option>
       <option *ngFor="let role of uniqueRoles" [value]="role">{{ role }}</option>
     </select>
@@ -40,7 +40,7 @@
 
   <div>
     <label for="genderFilter">Filter by Gender:</label>
-    <select id="genderFilter" [(ngModel)]="selectedGender" (change)="filterUsers()">
+    <select id="genderFilter" [(ngModel)]="selectedGender" (change)="filteredUsers()">
       <option value="">All</option>
       <option *ngFor="let gender of uniqueGenders" [value]="gender">{{ gender }}</option>
     </select>

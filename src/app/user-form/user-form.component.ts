@@ -1,7 +1,7 @@
 // user-form.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { FormsModule } from '@angular/forms';
 import { User, Address } from '../user.model';
 import { UserService } from '../services/user.service';
 
